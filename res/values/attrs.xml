@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="txt_size" type="dimen" format="dimension">16sp</item>
+    <item name="line_padding" type="dimen" format="dimension">3dip</item>
+    <item name="width_padding" type="dimen" format="dimension">10dip</item>
+</resources>
