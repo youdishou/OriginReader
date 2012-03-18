@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -21,23 +22,27 @@ public class OriginReaderActivity extends Activity {
         tv = (TextView) findViewById(R.id.tv);
         mReadUtil = new ReadUtil(this, tv.getPaint(),0);
         
-        tv.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				try {
-					tv.setText(mReadUtil.getNextTxt());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-        
         try {
-			tv.setText(mReadUtil.getNextTxt());
+			tv.setText(mReadUtil.getTxt(true));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		try{
+			if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
+				tv.setText(mReadUtil.getTxt(true));
+			}else if(keyCode == KeyEvent.KEYCODE_VOLUME_UP){
+				tv.setText(mReadUtil.getTxt(false));
+			}else if(keyCode == KeyEvent.KEYCODE_BACK){
+				finish();
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return true;
 	}
 	
 	
