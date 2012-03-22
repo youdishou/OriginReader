@@ -10,10 +10,9 @@ import android.graphics.Rect;
 import android.view.View;
 
 import com.yz.project.OriginReader.R;
+import com.yz.project.OriginReader.constant.Constant;
 
 public class ReadUtil {
-	private final String NEWLINE = "\r\n";
-	
 	private long mOffset;
 	private long mPreOffset;
 	
@@ -41,6 +40,22 @@ public class ReadUtil {
 		mOffset = offset;
 	}
 	
+	public String getTxtArray(boolean next) throws IOException{
+		byte[] buffer = new byte[1024 * 4];
+		InputStream is = mActivity.getAssets().open(FILE_NAME);
+		
+		if(next){
+			offset(is, mOffset);
+		}else{
+			offset(is, mPreOffset - 1024 * 4);
+		}
+		int len = is.read(buffer);
+		String str = new String(buffer, 0, len, "gbk");
+		
+		StringBuilder sb = clipText(is, str, next);
+		return returnResult(sb);
+	}
+	
 	
 	public String getTxt(boolean next) throws IOException{
 		byte[] buffer = new byte[1024 * 4];
@@ -64,7 +79,7 @@ public class ReadUtil {
 	private StringBuilder clipText(InputStream is, String str,boolean forward)
 			throws IOException {
 		int each_height = computeEachHeight(str);
-		String[] strs = str.split(String.valueOf(NEWLINE));
+		String[] strs = str.split(String.valueOf(Constant.NEWLINE));
 		if(forward){
 			return clipNextText(strs, each_height);
 		}else{
@@ -86,20 +101,23 @@ public class ReadUtil {
 					int index = mPaint.breakText(s, true, mWidth, null);
 					height += each_height;
 					if(height >= mHeight){
-//						System.out.println(sb.toString());
 						return sb;
 					}
 	
 					String lineStr = s.substring(0,index);
 					sb.append(lineStr);
+					sb.append(Constant.NEWLINE);
+					mOffset -= 2;
 					s = s.substring(index,s.length());
 					
 					if(s.length() == 0){
+						mOffset += 2;
 						break;
 					}
 				}
+			}else{
+				sb.append(Constant.NEWLINE);
 			}
-			sb.append(NEWLINE);
 			height += each_height;
 		}
 		return sb;

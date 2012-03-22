@@ -9,11 +9,11 @@
     android:paddingBottom="2dip" 
     android:background="@color/bg_color"
     android:id="@+id/ll">
-    <TextView
+    <com.yz.project.OriginReader.widget.ReadView
         android:id="@+id/tv"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:textColor="@color/txt_color"
-        android:textSize="16sp" />
+        android:textSize="16sp"/>
 
 </LinearLayout>

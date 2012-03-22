@@ -3,23 +3,24 @@ package com.yz.project.OriginReader;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
+import android.view.Window;
 
 import com.yz.project.OriginReader.util.ReadUtil;
+import com.yz.project.OriginReader.widget.ReadView;
 
 public class OriginReaderActivity extends Activity {
-	private TextView tv;
+	private ReadView tv;
 	
 	ReadUtil mReadUtil;
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        tv = (TextView) findViewById(R.id.tv);
+        
+        tv = (ReadView) findViewById(R.id.tv);
         mReadUtil = new ReadUtil(this, tv.getPaint(),0);
         
         try {
@@ -28,6 +29,17 @@ public class OriginReaderActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+        System.out.println(getWindow().findViewById(Window.ID_ANDROID_CONTENT).getMeasuredHeight());
+	}
+
+
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		try{
