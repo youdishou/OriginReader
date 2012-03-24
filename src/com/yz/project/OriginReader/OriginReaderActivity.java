@@ -1,33 +1,28 @@
 package com.yz.project.OriginReader;
 
-import java.io.IOException;
+import java.util.List;
 
 import android.app.Activity;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Window;
 
-import com.yz.project.OriginReader.util.ReadUtil;
+import com.yz.project.OriginReader.util.ReadUtil2;
 import com.yz.project.OriginReader.widget.ReadView;
 
 public class OriginReaderActivity extends Activity {
 	private ReadView tv;
 	
-	ReadUtil mReadUtil;
+	ReadUtil2 mReadUtil;
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
         tv = (ReadView) findViewById(R.id.tv);
-        mReadUtil = new ReadUtil(this, tv.getPaint(),0);
         
-        try {
-			tv.setText(mReadUtil.getTxt(true));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        mReadUtil = new ReadUtil2(this, "dadg", tv.getPaint(), 700, 450);
+        
 	}
 	
 	
@@ -44,9 +39,11 @@ public class OriginReaderActivity extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		try{
 			if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
-				tv.setText(mReadUtil.getTxt(true));
+//				tv.setText(mReadUtil.getTxt(true));
+				outList(mReadUtil.getLinesTxt(10, true));
 			}else if(keyCode == KeyEvent.KEYCODE_VOLUME_UP){
-				tv.setText(mReadUtil.getTxt(false));
+//				tv.setText(mReadUtil.getTxt(false));
+				outList(mReadUtil.getLinesTxt(10, false));
 			}else if(keyCode == KeyEvent.KEYCODE_BACK){
 				finish();
 			}
@@ -57,7 +54,11 @@ public class OriginReaderActivity extends Activity {
 		return true;
 	}
 	
-	
+	private void outList(List<String> list){
+		for(String str : list){
+			System.out.println(str);
+		}
+	}
 }
 
 
