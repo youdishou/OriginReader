@@ -21,29 +21,21 @@ public class OriginReaderActivity extends Activity {
         
         tv = (ReadView) findViewById(R.id.tv);
         
-        mReadUtil = new ReadUtil2(this, "dadg", tv.getPaint(), 700, 450);
+        mReadUtil = new ReadUtil2(this, "dadg.txt", tv.getPaint(), 700, 450);
         
 	}
-	
-	
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-        System.out.println(getWindow().findViewById(Window.ID_ANDROID_CONTENT).getMeasuredHeight());
-	}
-
-
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		try{
 			if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
-//				tv.setText(mReadUtil.getTxt(true));
-				outList(mReadUtil.getLinesTxt(10, true));
+				List<String> tmp = mReadUtil.getLinesTxt(10, true);
+				tv.setTextList(tmp);
+				outList(tmp);
 			}else if(keyCode == KeyEvent.KEYCODE_VOLUME_UP){
-//				tv.setText(mReadUtil.getTxt(false));
-				outList(mReadUtil.getLinesTxt(10, false));
+				List<String> tmp = mReadUtil.getLinesTxt(10, false);
+				tv.setTextList(tmp);
+				outList(tmp);
 			}else if(keyCode == KeyEvent.KEYCODE_BACK){
 				finish();
 			}
@@ -55,8 +47,9 @@ public class OriginReaderActivity extends Activity {
 	}
 	
 	private void outList(List<String> list){
+//		System.out.println(list.size());
 		for(String str : list){
-			System.out.println(str);
+			System.out.println(str+"");
 		}
 	}
 }

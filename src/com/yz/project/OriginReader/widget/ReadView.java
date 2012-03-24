@@ -1,6 +1,6 @@
 package com.yz.project.OriginReader.widget;
 
-import com.yz.project.OriginReader.util.AppUtil;
+import java.util.List;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,8 +8,10 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.yz.project.OriginReader.util.AppUtil;
+
 public class ReadView extends TextView{
-	private String[] mTxt;
+	private List<String> mTxt;
 	private int mLinePadding = 0;
 	private int mLineHeight = 0;
 	
@@ -21,24 +23,19 @@ public class ReadView extends TextView{
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-//		super.onDraw(canvas);
+		if(mTxt == null){
+			return;
+		}
 		
-//		int height = 0;
-		for(int i=0; i<mTxt.length; i++){
+		for(int i=0; i<mTxt.size(); i++){
 			int y = mLineHeight * (i + 1);
-			canvas.drawText(mTxt[i], getPaddingLeft(), y, getPaint());
+			String tmp = mTxt.get(i);
+			canvas.drawText(tmp, getPaddingLeft(), y, getPaint());
 		}
 	}
 	
-	public void setText(String str){
-		mTxt = str.split("\r\n");
-		System.out.println(mTxt.length);
+	public void setTextList(List<String> list){
+		mTxt = list;
 		invalidate();
-	}
-	
-	private int getTextHeight(String str){
-		Rect r = new Rect();
-		getPaint().getTextBounds(str, 0, str.length(), r);
-		return r.bottom - r.top;
 	}
 }
