@@ -11,7 +11,7 @@ import com.yz.project.OriginReader.constant.Constant;
 import android.content.Context;
 import android.graphics.Paint;
 
-public class ReadUtil3 {
+public class ReadUtil {
 	private String mTxtName;
 	private Context mContext;
 	
@@ -24,7 +24,7 @@ public class ReadUtil3 {
 	private long mStartOffset;
 	private long mEndOffset;
 	
-	public ReadUtil3(Context c,String txtName, Paint p,int width){
+	public ReadUtil(Context c,String txtName, Paint p,int width){
 		mTxtName = txtName;
 		mContext = c;
 		mPaint = p;
@@ -143,5 +143,14 @@ public class ReadUtil3 {
 			}
 		}
 		return line;
+	}
+	
+	public void setStartOffset(long offset){
+		mStartOffset = offset;
+		mEndOffset = offset;
+	}
+	
+	public long getStartOffset(){
+		return mStartOffset;
 	}
 }
