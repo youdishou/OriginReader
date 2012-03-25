@@ -24,6 +24,8 @@ public class ReadUtil {
 	private long mStartOffset;
 	private long mEndOffset;
 	
+	private String mEncoding = "gbk";
+	
 	public ReadUtil(Context c,String txtName, Paint p,int width){
 		mTxtName = txtName;
 		mContext = c;
@@ -50,7 +52,7 @@ public class ReadUtil {
 			mEndOffset = mStartOffset;
 		}
 		int len = is.read(mBuffer);
-		String str = new String(mBuffer, 0, len, "gbk");
+		String str = new String(mBuffer, 0, len, mEncoding);
 
 		clipText(data, str, line, forward);
 
@@ -121,12 +123,12 @@ public class ReadUtil {
 				String lineStr = s.substring(start, start + len);
 				data.add(lineStr);
 				start += len;
-				mEndOffset += lineStr.getBytes("gbk").length;
+				mEndOffset += lineStr.getBytes(mEncoding).length;
 			}else{
 				String lineStr = s.substring(end - len, end); 
 				data.addFirst(lineStr);
 				end -= len;
-				mStartOffset -= lineStr.getBytes("gbk").length;
+				mStartOffset -= lineStr.getBytes(mEncoding).length;
 			}
 			line--;
 			
@@ -152,5 +154,9 @@ public class ReadUtil {
 	
 	public long getStartOffset(){
 		return mStartOffset;
+	}
+	
+	public void setEncoding(String encoding){
+		mEncoding = encoding;
 	}
 }

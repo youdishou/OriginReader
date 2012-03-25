@@ -7,13 +7,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
-import com.yz.project.OriginReader.util.ReadUtil3;
+import com.yz.project.OriginReader.util.PreferencesUtil;
+import com.yz.project.OriginReader.util.ReadUtil;
 import com.yz.project.OriginReader.widget.ReadView;
 
 public class OriginReaderActivity extends Activity {
 	private ReadView rv;
 	
-	ReadUtil3 mReadUtil;
+	ReadUtil mReadUtil;
 	
 	private int mLine;
 	@Override
@@ -29,8 +30,16 @@ public class OriginReaderActivity extends Activity {
         w = w - rv.getLineHeight() / 2;
         System.out.println(w+","+h);
         mLine = h / rv.getLineHeight();
-        mReadUtil = new ReadUtil3(this, "dadg.txt", rv.getPaint(), w);
-
+//        mReadUtil = new ReadUtil(this, "dadg.txt", rv.getPaint(), w);
+        
+        mReadUtil = new ReadUtil(this, "proem", rv.getPaint(), w);
+        mReadUtil.setEncoding("utf8");
+        
+        long offset = PreferencesUtil.getOffset(this);
+        if(offset != -1){
+        	mReadUtil.setStartOffset(offset);
+        }
+        
 		try {
 
 			List<String> tmp = mReadUtil.getLinesTxt(mLine, true);
@@ -52,6 +61,7 @@ public class OriginReaderActivity extends Activity {
 				rv.setTextList(tmp);
 //				outList(tmp);
 			}else if(keyCode == KeyEvent.KEYCODE_BACK){
+				PreferencesUtil.saveOffset(this, mReadUtil.getStartOffset());
 				finish();
 			}
 		}catch (Exception e){
@@ -67,6 +77,7 @@ public class OriginReaderActivity extends Activity {
 			System.out.println(str+"");
 		}
 	}
+	
 }
 
 
