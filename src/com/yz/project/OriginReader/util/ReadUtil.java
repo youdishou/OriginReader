@@ -26,6 +26,8 @@ public class ReadUtil {
 	
 	private String mEncoding = "gbk";
 	
+	private String mNewLine = Constant.GBK_NEWLINE;
+	
 	public ReadUtil(Context c,String txtName, Paint p,int width){
 		mTxtName = txtName;
 		mContext = c;
@@ -75,7 +77,7 @@ public class ReadUtil {
 	}
 	
 	private void clipText(LinkedList<String> data,String str,int line,boolean forward) throws UnsupportedEncodingException{
-		String[] strs = str.split(Constant.NEWLINE);
+		String[] strs = str.split(mNewLine);
 		
 		if(forward){
 			for(int i=0;i<strs.length;i++){
@@ -103,14 +105,14 @@ public class ReadUtil {
 		if(s.length() <= 0){
 			line--;
 			if(forward){
-				data.add(Constant.NEWLINE);
+				data.add(mNewLine);
 			}else{
-				data.addFirst(Constant.NEWLINE);
+				data.addFirst(mNewLine);
 			}
 			if(forward){//空的一行
-				mEndOffset += 2;
+				mEndOffset += mNewLine.getBytes().length;
 			}else{
-				mStartOffset -= 2;
+				mStartOffset -= mNewLine.getBytes().length;
 			}
 			return line;
 		}
@@ -134,9 +136,9 @@ public class ReadUtil {
 			
 			if(start >= end || end <= start){//一行完结
 				if(forward){
-					mEndOffset += 2;
+					mEndOffset += mNewLine.getBytes().length;
 				}else{
-					mStartOffset -= 2;
+					mStartOffset -= mNewLine.getBytes().length;
 				}
 				break;
 			}
@@ -158,5 +160,6 @@ public class ReadUtil {
 	
 	public void setEncoding(String encoding){
 		mEncoding = encoding;
+		mNewLine = Constant.UTF8_NEWLINE;
 	}
 }

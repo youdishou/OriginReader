@@ -16,15 +16,13 @@ public class IndexActivity extends Activity{
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 					View v = findViewById(R.id.iv_index);
 					int width = v.getMeasuredWidth();
 					int height = v.getMeasuredHeight();
 					Intent intent = new Intent(IndexActivity.this,OriginReaderActivity.class);
 					intent.putExtra("h", height);
 					intent.putExtra("w", width);
-					System.out.println(width+","+height);
-					System.out.println(v.getWidth()+","+v.getHeight());
 					startActivity(intent);
 					finish();
 				} catch (InterruptedException e) {

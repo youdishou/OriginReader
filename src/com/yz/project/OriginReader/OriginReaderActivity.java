@@ -30,10 +30,10 @@ public class OriginReaderActivity extends Activity {
         w = w - rv.getLineHeight() / 2;
         System.out.println(w+","+h);
         mLine = h / rv.getLineHeight();
-//        mReadUtil = new ReadUtil(this, "dadg.txt", rv.getPaint(), w);
+        mReadUtil = new ReadUtil(this, "dadg.txt", rv.getPaint(), w);
         
-        mReadUtil = new ReadUtil(this, "proem", rv.getPaint(), w);
-        mReadUtil.setEncoding("utf8");
+//        mReadUtil = new ReadUtil(this, "proem", rv.getPaint(), w);
+//        mReadUtil.setEncoding("utf8");
         
         long offset = PreferencesUtil.getOffset(this);
         if(offset != -1){
