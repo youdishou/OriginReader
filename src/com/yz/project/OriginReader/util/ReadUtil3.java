@@ -6,13 +6,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
 
-import android.content.Context;
-import android.graphics.Paint;
-import android.widget.FrameLayout;
-
 import com.yz.project.OriginReader.constant.Constant;
 
-public class ReadUtil2 {
+import android.content.Context;
+import android.graphics.Paint;
+
+public class ReadUtil3 {
 	private String mTxtName;
 	private Context mContext;
 	
@@ -21,18 +20,15 @@ public class ReadUtil2 {
 	private Paint mPaint;
 	
 	private int mWidth;
-	private int mHeight;
 
-	private long mOffset;
-	private long mPreOffset;
+	private long mStartOffset;
+	private long mEndOffset;
 	
-	public ReadUtil2(Context c,String txtName, Paint p,int height,int width){
+	public ReadUtil3(Context c,String txtName, Paint p,int width){
 		mTxtName = txtName;
 		mContext = c;
 		mPaint = p;
 		mWidth = width;
-		mHeight = height;
-		mBuffer = new byte[1024 * 4];
 	}
 	
 	public List<String> getLinesTxt(int line,boolean forward) throws IOException{
@@ -40,26 +36,30 @@ public class ReadUtil2 {
 		InputStream is = mContext.getAssets().open(mTxtName);
 		
 		if(forward){
-			offset(is, mOffset);
-			mPreOffset = mOffset;
+			offset(is, mEndOffset);
+			mStartOffset = mEndOffset;
+			mBuffer = new byte[1024 * 4];
 		}else{
-			if(offset(is, mPreOffset - 1024 * 4) == 0){
-				mBuffer = new byte[(int) mPreOffset];
+			if(offset(is, mStartOffset - 1024 * 4) == -1){
+				mBuffer = new byte[(int) mStartOffset];
+				System.out.println("in");
+			}else{
+				mBuffer = new byte[1024 * 4];
+				System.out.println("out");
 			}
-			mOffset = mPreOffset;
-			
+			mEndOffset = mStartOffset;
 		}
 		int len = is.read(mBuffer);
 		String str = new String(mBuffer, 0, len, "gbk");
 
 		clipText(data, str, line, forward);
-		
+
 		return data;
 	}
 	
 	private long offset(InputStream is, long needOffset) throws IOException {
 		if(needOffset <= 0){
-			return 0;
+			return -1;
 		}
 		long offset;
 		while(true){
@@ -100,11 +100,15 @@ public class ReadUtil2 {
 		
 		if(s.length() <= 0){
 			line--;
-			data.add(Constant.NEWLINE);
-			if(forward){//空的一行
-				mOffset += 2;
+			if(forward){
+				data.add(Constant.NEWLINE);
 			}else{
-				mPreOffset -= 2;
+				data.addFirst(Constant.NEWLINE);
+			}
+			if(forward){//空的一行
+				mEndOffset += 2;
+			}else{
+				mStartOffset -= 2;
 			}
 			return line;
 		}
@@ -117,20 +121,20 @@ public class ReadUtil2 {
 				String lineStr = s.substring(start, start + len);
 				data.add(lineStr);
 				start += len;
-				mOffset += lineStr.getBytes("gbk").length;
+				mEndOffset += lineStr.getBytes("gbk").length;
 			}else{
 				String lineStr = s.substring(end - len, end); 
 				data.addFirst(lineStr);
 				end -= len;
-				mPreOffset -= lineStr.getBytes("gbk").length;
+				mStartOffset -= lineStr.getBytes("gbk").length;
 			}
 			line--;
 			
 			if(start >= end || end <= start){//一行完结
 				if(forward){
-					mOffset += 2;
+					mEndOffset += 2;
 				}else{
-					mPreOffset -= 2;
+					mStartOffset -= 2;
 				}
 				break;
 			}

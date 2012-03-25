@@ -38,4 +38,8 @@ public class ReadView extends TextView{
 		mTxt = list;
 		invalidate();
 	}
+	
+	public int getLineHeight(){
+		return mLineHeight;
+	}
 }
