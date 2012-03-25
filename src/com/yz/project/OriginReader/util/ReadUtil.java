@@ -24,9 +24,10 @@ public class ReadUtil {
 	private long mStartOffset;
 	private long mEndOffset;
 	
-	private String mEncoding = "gbk";
+//	private String mEncoding = "gbk";
 	
-	private String mNewLine = Constant.GBK_NEWLINE;
+//	private String Constant.CURRENT_NEWLINE = Constant.GBK_NEWLINE;
+	
 	
 	public ReadUtil(Context c,String txtName, Paint p,int width){
 		mTxtName = txtName;
@@ -54,7 +55,7 @@ public class ReadUtil {
 			mEndOffset = mStartOffset;
 		}
 		int len = is.read(mBuffer);
-		String str = new String(mBuffer, 0, len, mEncoding);
+		String str = new String(mBuffer, 0, len, Constant.CURRENT_ENCODING);
 
 		clipText(data, str, line, forward);
 
@@ -77,7 +78,7 @@ public class ReadUtil {
 	}
 	
 	private void clipText(LinkedList<String> data,String str,int line,boolean forward) throws UnsupportedEncodingException{
-		String[] strs = str.split(mNewLine);
+		String[] strs = str.split(Constant.CURRENT_NEWLINE);
 		
 		if(forward){
 			for(int i=0;i<strs.length;i++){
@@ -105,14 +106,14 @@ public class ReadUtil {
 		if(s.length() <= 0){
 			line--;
 			if(forward){
-				data.add(mNewLine);
+				data.add(Constant.CURRENT_NEWLINE);
 			}else{
-				data.addFirst(mNewLine);
+				data.addFirst(Constant.CURRENT_NEWLINE);
 			}
 			if(forward){//空的一行
-				mEndOffset += mNewLine.getBytes().length;
+				mEndOffset += Constant.CURRENT_NEWLINE.getBytes().length;
 			}else{
-				mStartOffset -= mNewLine.getBytes().length;
+				mStartOffset -= Constant.CURRENT_NEWLINE.getBytes().length;
 			}
 			return line;
 		}
@@ -125,20 +126,20 @@ public class ReadUtil {
 				String lineStr = s.substring(start, start + len);
 				data.add(lineStr);
 				start += len;
-				mEndOffset += lineStr.getBytes(mEncoding).length;
+				mEndOffset += lineStr.getBytes(Constant.CURRENT_ENCODING).length;
 			}else{
 				String lineStr = s.substring(end - len, end); 
 				data.addFirst(lineStr);
 				end -= len;
-				mStartOffset -= lineStr.getBytes(mEncoding).length;
+				mStartOffset -= lineStr.getBytes(Constant.CURRENT_ENCODING).length;
 			}
 			line--;
 			
 			if(start >= end || end <= start){//一行完结
 				if(forward){
-					mEndOffset += mNewLine.getBytes().length;
+					mEndOffset += Constant.CURRENT_NEWLINE.getBytes().length;
 				}else{
-					mStartOffset -= mNewLine.getBytes().length;
+					mStartOffset -= Constant.CURRENT_NEWLINE.getBytes().length;
 				}
 				break;
 			}
@@ -156,10 +157,5 @@ public class ReadUtil {
 	
 	public long getStartOffset(){
 		return mStartOffset;
-	}
-	
-	public void setEncoding(String encoding){
-		mEncoding = encoding;
-		mNewLine = Constant.UTF8_NEWLINE;
 	}
 }

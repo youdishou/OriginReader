@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
+import com.yz.project.OriginReader.constant.Constant;
 import com.yz.project.OriginReader.util.PreferencesUtil;
 import com.yz.project.OriginReader.util.ReadUtil;
 import com.yz.project.OriginReader.widget.ReadView;
@@ -17,6 +18,10 @@ public class OriginReaderActivity extends Activity {
 	ReadUtil mReadUtil;
 	
 	private int mLine;
+
+	private String mFileName;
+
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +33,13 @@ public class OriginReaderActivity extends Activity {
         int h = getIntent().getIntExtra("h",getWindowManager().getDefaultDisplay().getHeight()) - rv.getPaddingBottom() - rv.getPaddingTop();
         
         w = w - rv.getLineHeight() / 2;
-        System.out.println(w+","+h);
         mLine = h / rv.getLineHeight();
-        mReadUtil = new ReadUtil(this, "dadg.txt", rv.getPaint(), w);
         
-//        mReadUtil = new ReadUtil(this, "proem", rv.getPaint(), w);
-//        mReadUtil.setEncoding("utf8");
+    	mFileName = getIntent().getStringExtra("fileName");
+    	long offset = getIntent().getIntExtra("offset", -1);
         
-        long offset = PreferencesUtil.getOffset(this);
+        mReadUtil = new ReadUtil(this, mFileName, rv.getPaint(), w);
+        
         if(offset != -1){
         	mReadUtil.setStartOffset(offset);
         }
@@ -55,13 +59,12 @@ public class OriginReaderActivity extends Activity {
 			if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
 				List<String> tmp = mReadUtil.getLinesTxt(mLine, true);
 				rv.setTextList(tmp);
-//				outList(tmp);
 			}else if(keyCode == KeyEvent.KEYCODE_VOLUME_UP){
 				List<String> tmp = mReadUtil.getLinesTxt(mLine, false);
 				rv.setTextList(tmp);
-//				outList(tmp);
 			}else if(keyCode == KeyEvent.KEYCODE_BACK){
 				PreferencesUtil.saveOffset(this, mReadUtil.getStartOffset());
+				PreferencesUtil.setFileName(this, mFileName);
 				finish();
 			}
 		}catch (Exception e){
@@ -70,14 +73,6 @@ public class OriginReaderActivity extends Activity {
 		
 		return true;
 	}
-	
-	private void outList(List<String> list){
-//		System.out.println(list.size());
-		for(String str : list){
-			System.out.println(str+"");
-		}
-	}
-	
 }
 
 
