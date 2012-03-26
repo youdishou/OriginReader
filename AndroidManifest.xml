@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yz.project.OriginReader"
+    package="com.yz.project.OriginReader.daqindiguo"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -10,15 +10,34 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".OriginReaderActivity"
+            android:name="com.yz.project.OriginReader.OriginReaderActivity"
+            android:label="@string/app_name" 
+            android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        <activity
+            android:name="com.yz.project.OriginReader.IndexActivity"
             android:label="@string/app_name" 
             android:theme="@android:style/Theme.Black.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.yz.project.OriginReader.CatalogActivity"
+            android:label="@string/app_name" 
+            android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        
+        <activity android:name="com.dianru.sdk.AdActivity" android:theme = "@android:style/Theme.Translucent">
+			<meta-data android:name="com.dianru.sdk.keycode" android:value="KEY00005503040000EA" />
+		</activity>
+		<meta-data android:value="4f708f535270154a81000016" android:name="UMENG_APPKEY"/>
     </application>
-
+        <uses-permission android:name="android.permission.INTERNET" />
+		<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+		<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+		<uses-permission android:name="android.permission.READ_LOGS" />
 </manifest>
