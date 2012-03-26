@@ -20,7 +20,7 @@ import com.yz.project.OriginReader.util.ReadUtil;
 import com.yz.project.OriginReader.widget.ProgressView;
 import com.yz.project.OriginReader.widget.ReadView;
 
-public class OriginReaderActivity extends Activity {
+public class OriginReaderActivity extends YZActivity {
 	private ReadView rv;
 	
 	ReadUtil mReadUtil;

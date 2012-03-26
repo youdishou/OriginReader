@@ -13,7 +13,7 @@ import com.yz.project.OriginReader.constant.Catalog;
 import com.yz.project.OriginReader.daqindiguo.R;
 import com.yz.project.OriginReader.domain.CatalogInfo;
 
-public class CatalogActivity extends Activity{
+public class CatalogActivity extends YZActivity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

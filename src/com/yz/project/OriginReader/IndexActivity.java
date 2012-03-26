@@ -1,19 +1,20 @@
 package com.yz.project.OriginReader;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.mobclick.android.MobclickAgent;
 import com.yz.project.OriginReader.daqindiguo.R;
 import com.yz.project.OriginReader.util.PreferencesUtil;
 
-public class IndexActivity extends Activity{
+public class IndexActivity extends YZActivity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.index);
+		MobclickAgent.onError(this);
 		new Thread(new Runnable() {
 			
 			@Override
