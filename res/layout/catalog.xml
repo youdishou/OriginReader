@@ -4,5 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
     <ListView android:id="@+id/lv_catalog"
-        android:layout_width="fill_parent" android:layout_height="fill_parent"/>
+        android:layout_width="fill_parent" android:layout_height="fill_parent"
+        android:background="@color/list_color" android:cacheColorHint="@color/list_color"/>
 </LinearLayout>

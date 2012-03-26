@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dianru="http://schemas.android.com/apk/res/com.yz.project.OriginReader.daqindiguo"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -9,11 +10,19 @@
     android:paddingBottom="2dip" 
     android:background="@color/bg_color"
     android:id="@+id/ll">
+	<com.dianru.sdk.AdSpace android:id="@+id/ad_space"
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/ad_height"
+		dianru:interval="59"
+		dianru:keywords=" game"
+		dianru:type="0"
+		android:layout_alignParentBottom="true"/>
+    
     <com.yz.project.OriginReader.widget.ReadView
         android:id="@+id/tv"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:textColor="@color/txt_color"
-        android:textSize="16sp"/>
-
-</LinearLayout>
+        android:textSize="16sp"
+        android:layout_above="@id/ad_space"/>
+</RelativeLayout>

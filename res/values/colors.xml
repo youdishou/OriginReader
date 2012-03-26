@@ -2,4 +2,5 @@
 <resources>
     <color name="txt_color">#ff10214e</color>
     <color name="bg_color">#ffb1bdd7</color>
+    <color name="list_color">#fffefefe</color>
 </resources>

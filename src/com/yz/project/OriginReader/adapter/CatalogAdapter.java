@@ -5,11 +5,11 @@ import java.util.List;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
-import com.yz.project.OriginReader.R;
+import com.yz.project.OriginReader.daqindiguo.R;
 import com.yz.project.OriginReader.domain.CatalogInfo;
 
 public class CatalogAdapter extends BaseAdapter{

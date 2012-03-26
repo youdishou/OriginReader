@@ -3,4 +3,14 @@
     <item name="txt_size" type="dimen" format="dimension">16sp</item>
     <item name="line_padding" type="dimen" format="dimension">3dip</item>
     <item name="width_padding" type="dimen" format="dimension">10dip</item>
+    <item name="ad_height" type="dimen" format="dimension">50dip</item>
+    
+    <declare-styleable name="com.dianru.sdk.AdSpace">
+		<attr name="keywords" format="string" />
+		<attr name="interval"
+			format="integer" />
+		<attr name="type"
+			format="integer" />
+	</declare-styleable>
+    
 </resources>

@@ -1,11 +1,12 @@
 package com.yz.project.OriginReader;
 
-import com.yz.project.OriginReader.util.PreferencesUtil;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.yz.project.OriginReader.daqindiguo.R;
+import com.yz.project.OriginReader.util.PreferencesUtil;
 
 public class IndexActivity extends Activity{
 

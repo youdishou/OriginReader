@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.yz.project.OriginReader.adapter.CatalogAdapter;
 import com.yz.project.OriginReader.constant.Catalog;
+import com.yz.project.OriginReader.daqindiguo.R;
 import com.yz.project.OriginReader.domain.CatalogInfo;
 
 public class CatalogActivity extends Activity{
@@ -34,6 +35,7 @@ public class CatalogActivity extends Activity{
 				intent.putExtra("h", getIntent().getIntExtra("h", -1));
 				intent.putExtra("w", getIntent().getIntExtra("w", -1));
 				startActivity(intent);
+				finish();
 			}
 		});
 	}
