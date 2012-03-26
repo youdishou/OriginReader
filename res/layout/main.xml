@@ -17,12 +17,15 @@
 		dianru:keywords=" game"
 		dianru:type="0"
 		android:layout_alignParentBottom="true"/>
-    
+    <com.yz.project.OriginReader.widget.ProgressView
+        android:id="@+id/pv"
+        android:layout_width="fill_parent" android:layout_height="@dimen/pv_height"
+        android:layout_above="@id/ad_space"/>
     <com.yz.project.OriginReader.widget.ReadView
         android:id="@+id/tv"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:textColor="@color/txt_color"
         android:textSize="16sp"
-        android:layout_above="@id/ad_space"/>
+        android:layout_above="@id/pv"/>
 </RelativeLayout>

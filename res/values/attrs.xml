@@ -4,6 +4,7 @@
     <item name="line_padding" type="dimen" format="dimension">3dip</item>
     <item name="width_padding" type="dimen" format="dimension">10dip</item>
     <item name="ad_height" type="dimen" format="dimension">50dip</item>
+    <item name="pv_height" type="dimen" format="dimension">1.5dip</item>
     
     <declare-styleable name="com.dianru.sdk.AdSpace">
 		<attr name="keywords" format="string" />
