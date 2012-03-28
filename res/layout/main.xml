@@ -12,9 +12,9 @@
     android:id="@+id/ll">
 	<com.dianru.sdk.AdSpace android:id="@+id/ad_space"
 		android:layout_width="fill_parent"
-		android:layout_height="@dimen/ad_height"
+		android:layout_height="wrap_content"
+		android:background="@android:color/white"
 		dianru:interval="59"
-		dianru:keywords=" game"
 		dianru:type="0"
 		android:layout_alignParentBottom="true"/>
     <com.yz.project.OriginReader.widget.ProgressView

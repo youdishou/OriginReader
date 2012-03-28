@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -39,6 +38,7 @@ public class ReadView extends TextView{
 		invalidate();
 	}
 	
+	@Override
 	public int getLineHeight(){
 		return mLineHeight;
 	}

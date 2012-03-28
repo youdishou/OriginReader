@@ -30,8 +30,9 @@
         </activity>
         
         <activity android:name="com.dianru.sdk.AdActivity" android:theme = "@android:style/Theme.Translucent">
-			<meta-data android:name="com.dianru.sdk.keycode" android:value="KEY00005503040000EA" />
+			<meta-data android:name="com.dianru.sdk.keycode" android:value="0000AB070700009E" />
 		</activity>
+		<meta-data android:value="Development" android:name="UMENG_CHANNEL"/>
 		<meta-data android:value="4f708f535270154a81000016" android:name="UMENG_APPKEY"/>
     </application>
         <uses-permission android:name="android.permission.INTERNET" />
@@ -40,4 +41,7 @@
 		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 		<uses-permission android:name="android.permission.READ_LOGS" />
+	    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+		<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 </manifest>
